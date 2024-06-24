@@ -4,8 +4,8 @@
 # <xbar.version>v1.0</xbar.version>
 # <xbar.author>Christian Selvaratnam</xbar.author>
 # <xbar.author.github>cselvaratnam</xbar.author.github>
-# <xbar.desc>Displays the Church season or festival of the day using the Prayer for the Day from the Church of England website.</xbar.desc>
-# <xbar.image>https://imagizer.imageshack.com/img923/6807/SPClYy.png</xbar.image>
+# <xbar.desc>Displays the title of the church season or festival of the day and the Collect of the Day from the Church of England website.</xbar.desc>
+# <xbar.image>https://github.com/cselvaratnam/images/blob/6c68f941510460f27aca9677389f155f3abe6891/church-liturgical-calendar.png</xbar.image>
 # <xbar.dependencies>bash</xbar.dependencies>
 # <xbar.abouturl>https://bio.site/selvaratnam</xbar.abouturl>
 
