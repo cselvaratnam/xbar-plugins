@@ -9,20 +9,16 @@
 # <xbar.dependencies>bash</xbar.dependencies>
 # <xbar.abouturl>https://bio.site/selvaratnam</xbar.abouturl>
 
-# Collect the front page of the Church of England website
-web=$(curl -f -s -S https://www.churchofengland.org/)
+# Fetch the Church of England homepage
+web=$(curl -f -s -S https://www.churchofengland.org/) || { echo "Unavailable"; exit 1; }
 
-# Extract the season/festival title from the Prayer for the Day
-full_title=$(echo $web | sed 's/.*<div class="textfill-footer">.*<small>\(.*\)<\/small>.*/\1/')
+# Extract the season/festival title and the Collect of the Day
+full_title=$(echo "$web" | sed 's/.*<div class="textfill-footer">.*<small>\(.*\)<\/small>.*/\1/')
+short_title=$(echo "$full_title" | sed -e 's/^The //' -e 's/Blessed Virgin Mary/BVM/' -e 's/ (.*$//' -e 's/,.*//')
+collect=$(echo "$web" | sed -e 's/.*<div class="textfill-footer">.*<p>\(.*\)<\/p>.*/\1/' -e 's/<br \/>/\\r/g' -e 's/\\r /\\r/g')
 
-# Make short version of the title
-short_title=$(echo $full_title | sed -e 's/^The //' -e 's/Blessed Virgin Mary/BVM/' -e 's/ (.*$//' -e 's/,.*//')
-
-# Extract the Collect of the Day and reformat
-collect=$(echo $web | sed -e 's/.*<div class="textfill-footer">.*<p>\(.*\)<\/p>.*/\1/' -e 's/<br \/>/\\r/g' -e 's/\\r /\\r/g')
-
-printf "%s\n" "$short_title"
-echo "---"  
-printf "%s\n" "$full_title"
-printf "%s\n" "$collect"
+echo "$short_title"
+echo "---"
+echo "$full_title"
+echo "$collect"
 echo "Refresh | refresh=true"
